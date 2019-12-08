@@ -18,6 +18,14 @@ Wikidata Reservation Service
 
 
 ## Call from CURL
+
+To register a satellite:
+
+```
+>>> curl -d 'namespace=<YOUR_SATELLITE_NAMESPACE>' -d 'uri=<YOUR_SATELLITE_URI>' http://localhost:5000/register 
+Register successfully and you are ready to use this satellite. %
+```
+
 To get reservation service table:
 
 ```
@@ -36,11 +44,4 @@ To reserve a qnode:
 {
     "Latest qnode": "Q000001"
 }%
-```
-
-To register a satellite:
-
-```
->>> curl -d 'namespace=<YOUR_SATELLITE_NAMESPACE>' -d 'uri=<YOUR_SATELLITE_URI>' http://localhost:5000/register 
-Register successfully and you are ready to use this satellite. %
 ```
