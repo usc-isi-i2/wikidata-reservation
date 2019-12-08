@@ -22,25 +22,33 @@ def write_data(data):
         f.write(content)
 
 
-def format_qnode(next):
-    if next < 100000:
-        temp = "%06d" % next
+def format_qnode(latest):
+    if latest < 100000:
+        temp = "%06d" % latest
     else:
-        temp = str(next)
+        temp = str(latest)
     return 'Q' + temp
 
 
 def get_qnode(namespace) -> dict():
     data = read_data()
     if not data or namespace not in data.keys():
-        next = 1
-        data[namespace] = next + 1
-    elif namespace in data.keys():
-        next = data[namespace]
-        data[namespace] += 1
+        return None
+    if namespace in data.keys():
+        latest = data[namespace]['latest']
+        data[namespace]['latest'] += 1
     write_data(data)
-    return format_qnode(next)
+    return format_qnode(latest)
 
+
+def register(namespace, uri):
+    data = read_data()
+    if not data or namespace not in data.keys():
+        data[namespace] = {'uri': uri, 'latest': 1}
+        write_data(data)
+        return True
+    if namespace in data.keys():
+        return False
 
 # if __name__ == "__main__":
 #     namespace = 'dm'

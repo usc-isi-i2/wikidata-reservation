@@ -1,16 +1,46 @@
 # wikidata-reservation
 Wikidata Reservation Service
 
+## Prerequisites
+
+* Python 3.6+
+
 ## Installation
+
+1. Clone the repository
+2. Run:
+    ```
+    cd wikidata-reservation
+    pip install -r requirements.txt
+    python reservation_rest_api.py
+    ```
+3. Server is running at [`http://localhost:5000/`](http://localhost:5000/)
+
+
+## Call from CURL
+To get reservation service table:
+
 ```
-cd wikidata-reservation
-export FLASK_APP=reservation_rest_api.py
-flask run
+>>> curl http://localhost:5000/
++-------------+-------------------------------+----------------+
+| Satellite   | Satellite URI                 |   Latest qnode |
+|-------------+-------------------------------+----------------|
+| dm          | https://w3id.org/satellite/dm |              1 |
++-------------+-------------------------------+----------------+%
 ```
 
-## Basic Command
-When you use this command, it will return a new qnode under your satellite namespace.
+To reserve a qnode:
 
 ```
-curl -d 'namespace=<Your satellite namespace>' http://localhost:5000/reservation 
+>>> curl -d 'namespace=<YOUR_SATELLITE_NAMESPACE>' http://localhost:5000/reservation
+{
+    "Latest qnode": "Q000001"
+}%
+```
+
+To register a satellite:
+
+```
+>>> curl -d 'namespace=<YOUR_SATELLITE_NAMESPACE>' -d 'uri=<YOUR_SATELLITE_URI>' http://localhost:5000/register 
+Register successfully and you are ready to use this satellite. %
 ```
