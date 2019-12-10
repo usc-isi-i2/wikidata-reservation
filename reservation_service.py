@@ -25,7 +25,6 @@ def write_data(data):
 
 def format_qnode(latest, prefix, num_of_0):
     if latest < math.pow(10, int(num_of_0)):
-        print("%0" + num_of_0 + "d")
         temp = ("%0" + num_of_0 + "d") % latest
     else:
         temp = str(latest)
